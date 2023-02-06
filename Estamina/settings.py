@@ -24,15 +24,24 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'accounting/templates/accounting')
 SECRET_KEY = 'ed=r072jv9b!lehlb!2e4fis79&k$0l8=k3m%o761^$=u1&xq&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3stamina.econobilidade.com']
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'eac@nexthinking.com'
-EMAIL_HOST_PASSWORD = 'chemae235468'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'eac@nexthinking.com'
+# EMAIL_HOST_PASSWORD = 'chemae235468'
+# EMAIL_PORT = 587
+
+from django_sendgrid_parse.emails import TransactionalEmail
+DJANGO_SENDGRID_PARSE_API='9O5gKJyjQlqUkd1TKmjaaQ'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'chemalle'
+EMAIL_HOST_PASSWORD = '9O5gKJyjQlqUkd1TKmjaaQ'
 EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
@@ -52,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounting',
+    'django_sendgrid_parse',
 ]
 
 MIDDLEWARE = [

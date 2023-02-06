@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.conf.urls.static  import static
 from django.conf import settings
 from django.contrib.auth import views
+from django_sendgrid_parse.emails import TransactionalEmail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('accounting.urls')),
     url(r'^accounts/login/$', views.login, name='login'),
     url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
+    url("sendgrid", include("django_sendgrid_parse.urls")),
 ] + static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

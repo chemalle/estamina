@@ -19,9 +19,9 @@
           <a class="nav-link" href="{% url 'home' %}">#econobilidade</a>
           <td><select name="forma" onchange="location = this.value;">
             <option value="">Choose your Report</option>
-           <option value="#">General Ledger</option>
-           <option value="#">Balance Sheet</option>
-           <option value="#">Income Statement</option>
+           <option value="#">(Breve)General Ledger</option>
+           <option value="#">(Breve)Balance Sheet</option>
+           <option value="#">(Breve)Income Statement</option>
           </select></td>
 
         </li>
@@ -34,7 +34,7 @@
 <img src="{% static "images/images.png" %}" alt="My image"width="100%"
      height="341"/>
       <p>Informaçao com qualidade #econobilidade
-        <a href="#" class="btn btn-info btn-lg">
+        <a href="{% url 'excel' %}" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-download"></span> Donwload Razão Contabil
         </a>
     </div>

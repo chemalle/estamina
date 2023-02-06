@@ -9,5 +9,7 @@ urlpatterns = [
         views.activate, name='activate'),
     url(r'^accounting/$', views.xlsx_upload_accounting, name='statements'),
     url(r'^ledger/$', views.General_Ledger, name='GL'),
+    url(r'^modelos/$', views.download, name='modelo'),#esta é apenas a interface para o download
+    url(r'^download/$', views.excel_download, name='excel'),# isto realiza o download
 
 ]

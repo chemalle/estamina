@@ -68,14 +68,14 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
-
+@login_required
 def xlsx_upload_accounting(request):
     if request.method == 'POST' and request.FILES['tnt']:
         myfile = request.FILES['tnt']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         GL = pd.read_excel(filename,'geral')
-        
+
 
 
         for index,row in GL.iterrows():
@@ -83,15 +83,16 @@ def xlsx_upload_accounting(request):
                 if row[0] != 'create_date':
                     accounting = Accounting()
                     accounting.geralId = row[0]
-                    accounting.dataMovimento = row[1]
-                    accounting.unidade = row[2]
-                    accounting.tipo = row[3]
-                    accounting.categoria = row[4]
-                    accounting.origem = row[5]
-                    accounting.destino = row[6]
-                    accounting.observacao = row[7]
-                    accounting.valorReais = row[8]
-                    accounting.status = row[9]
+                    accounting.nr = row[1]
+                    accounting.dataMovimento = row[2]
+                    accounting.unidade = row[3]
+                    accounting.tipo = row[4]
+                    accounting.categoria = row[5]
+                    accounting.origem = row[6]
+                    accounting.destino = row[7]
+                    accounting.observacao = row[8]
+                    accounting.valorReais = row[9]
+                    accounting.status = row[10]
                     accounting.save()
             except Exception:
                 pass
@@ -110,3 +111,21 @@ def General_Ledger(request):
     qs = Accounting.pdobjects.all()
     df2 = qs.to_dataframe()
     return render_to_response('accounting/ledger.html',{'data':df2.to_html(index=False,columns=['dataMovimento','tipo','origem','destino','observacao','valorReais'])})
+
+
+
+def download(request):
+    context = {
+
+        'submit_btn': "excel"
+        }
+    return render(request, 'download.html',context)
+
+def excel_download(request):
+    qs = Accounting.pdobjects.all()
+    df2 = qs.to_dataframe()
+    fsock = df2.to_excel('accounting/templates/accounting/razao.xlsx',engine='openpyxl', index=False)
+    fsock = open('accounting/templates/accounting/razao.xlsx', 'rb')
+    response = HttpResponse(fsock, content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="report.xls"'
+    return response

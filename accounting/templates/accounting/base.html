@@ -110,9 +110,9 @@
           <a class="nav-link" href="#">#econobilidade</a>
           <td><select name="forma" onchange="location = this.value;">
             <option value="">Choose your Report</option>
-           <option value="#">Balance Sheet</option>
-           <option value="#">Envie e receba seu Balanço por e-mail</option>
-            <option value="https://econobilidade.com">Projeto Econobilidade</option>
+           <option value="#">(Breve) Balance Sheet</option>
+           <option value="{% url 'GL' %}">Razao Contabil</option>
+            <option value="{% url 'statements' %}">Importar planilha de controle financeiro</option>
           </select></td>
 
         </li>

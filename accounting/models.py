@@ -76,6 +76,7 @@ STATUS = (
 
 class Accounting(models.Model):
     geralId = models.IntegerField()
+    nr = models.CharField(max_length=20,help_text='Numero Documento',blank=True)
     dataMovimento = models.DateField()
     unidade = models.CharField(max_length=20,choices=EMPRESA,help_text='Insira a unidade',blank=False)
     tipo = models.CharField(max_length=20,choices=TIPO,help_text='Insira o tipo',blank=False)
